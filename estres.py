@@ -4,6 +4,8 @@ import concurrent.futures
 # url = "https://testdjango-production-2df0.up.railway.app/face/getFaces"
 url = "http://localhost:3001/face/getFaces"
 
+
+
 def send_request():
     files = {
         'ine': open('test.jpg', 'rb')
@@ -11,10 +13,25 @@ def send_request():
     response = requests.post(url, files=files)
     print(response.status_code) 
 
+def concurrent(n):
+    with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
+        _ = [executor.submit(send_request) for _ in range(n)]
 
 
-with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
-    futures = [executor.submit(send_request) for _ in range(100)]
+def not_concurrent(n):
+    for _ in range(n):
+        send_request()
 
 
-# send_request
+if __name__ == "__main__":
+    n = 100
+    concurrent(n)
+    not_concurrent(n)
+
+
+
+
+
+
+
+
