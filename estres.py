@@ -1,8 +1,8 @@
 import requests
 import concurrent.futures
 
-# url = "https://testdjango-production-2df0.up.railway.app/face/getFaces"
-url = "http://localhost:3001/face/getFaces"
+url = "https://faceidtest-production.up.railway.app/face/getFaces"
+# url = "http://localhost:3001/face/getFaces"
 
 
 
@@ -24,8 +24,8 @@ def not_concurrent(n):
 
 
 if __name__ == "__main__":
-    n = 100
-    concurrent(n)
+    n = 20
+    
     not_concurrent(n)
 
 

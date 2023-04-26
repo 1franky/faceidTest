@@ -41,7 +41,7 @@ def getNumpy2(ine):
             elif grade == 90:
                 images_rotadas.append([90, cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)])
             elif grade == 180:
-                images_rotadas.append([90, cv2.rotate(image, cv2.ROTATE_180)])
+                images_rotadas.append([180, cv2.rotate(image, cv2.ROTATE_180)])
             elif grade == 270:
                 images_rotadas.append([270, cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)])
 
@@ -94,19 +94,15 @@ def getNumpy(ine):
 
             print(f"{datetime.now()} \t se rota image {grade} grados ")
 
-            # img_color = cv2.cvtColor(image_rotada, cv2.COLOR_BGR2RGB)
-            """
-            boxes = face_recognition.face_locations(image_rotada, model="cnn")
-            fotoEncodings_1 = face_recognition.face_encodings(image_rotada,
-                                                              known_face_locations=boxes, num_jitters=1,
-                                                              model="small")
-            """
+            
             boxes = face_recognition.face_locations(image_rotada, model="hog")
             #print(f"{grade} \t {boxes}")
             fotoEncodings_1 = face_recognition.face_encodings(image_rotada,
                                                               known_face_locations=boxes, num_jitters=2,
                                                               model="small")
+
             print(f"{datetime.now()} \t num rostros {len(fotoEncodings_1)} ")
+
             for arr in fotoEncodings_1:
                 fotoEncodings.append(arr.tolist())
 
